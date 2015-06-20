@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Logistic Regression</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Logistic Regression">
+  <meta name="author" content="Bernard NK">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Logistic Regression</h1>
+    <h2>Probability of college admission</h2>
+    <p>Bernard NK<br/>Developing Data Products Project</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Predict admission into graduate school</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>This logistic regression has 3 predictor variables to determine the effect on admission into graduate school:</p>
+
+<ul>
+<li>GRE (Graduate Record Exam scores)</li>
+<li>GPA (grade point average)</li>
+<li>Prestige of the undergraduate institution (RANK from 1 to 4)</li>
+</ul>
+
+<p>The outcome variable (prediction), admit/don&#39;t admit, is a binary variable.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>How to use the Shiny application</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>How to use the reactive Shiny application:  </p>
+
+<ol>
+<li>Click on this link: <a href="https://bernardnk.shinyapps.io/Project">https://bernardnk.shinyapps.io/Project</a><br></li>
+<li>&quot;Choose a Rank&quot; to see the predicted probability of admission based on the Rank variable.<br></li>
+<li>Pick the &quot;Number of observations to view&quot; to see the observations for the selected rank.<br></li>
+<li>&quot;PredictedProb&quot; is the outcome variable (prediction), admit/don&#39;t admit, which is a binary variable.<br></li>
+</ol>
+
+<p>Note that the GPA is set to a constant value set to the overall mean.  </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>The sample dataset</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Here is a R expression executed here to display the data structure. The same dataset is loaded in the Shiny R application.  </p>
+
+<pre><code class="r">mydata &lt;- read.csv(&quot;http://www.ats.ucla.edu/stat/data/binary.csv&quot;)
+mydata$rank &lt;- factor(mydata$rank)
+mydata$admit &lt;- factor(mydata$admit)
+str(mydata)
+</code></pre>
+
+<pre><code>## &#39;data.frame&#39;:    400 obs. of  4 variables:
+##  $ admit: Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 2 2 2 1 2 2 1 2 1 ...
+##  $ gre  : int  380 660 800 640 520 760 560 400 540 700 ...
+##  $ gpa  : num  3.61 3.67 4 3.19 2.93 3 2.98 3.08 3.39 3.92 ...
+##  $ rank : Factor w/ 4 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;: 3 3 1 4 4 2 1 2 3 2 ...
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Applicability to other predictions</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>This application can be converted to predict other types of outcome.</p>
+
+<p>Determine factors that influence:</p>
+
+<ul>
+<li>Whether a political candidate wins an election, the outcome variable is binary (0/1); win or lose.</li>
+<li>Whether a consumer buys a product, the outcome variable is binary (0/1); buy or not buy.</li>
+</ul>
+
+<p>References:  </p>
+
+<ul>
+<li>Generalized Linear Models, <a href="http://www.statmethods.net/advstats/glm.html">http://www.statmethods.net/advstats/glm.html</a><br></li>
+<li>R Data Analysis Examples: Logit Regression, <a href="http://www.ats.ucla.edu/stat/r/dae/logit.htm">http://www.ats.ucla.edu/stat/r/dae/logit.htm</a><br></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Predict admission into graduate school'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='How to use the Shiny application'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='The sample dataset'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Applicability to other predictions'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
